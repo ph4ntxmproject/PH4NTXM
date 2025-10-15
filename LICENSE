@@ -1,0 +1,78 @@
+PH4NTXM – LICENSE | PH4NTXM © 2025
+
+
+1. Documentation & Guides
+
+All PH4NTXM documentation, manuals, release notes, and accompanying text files are released under the Creative Commons Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0).
+
+You are free to:
+
+Share — copy and redistribute the material in any medium or format
+
+Adapt — remix, transform, and build upon the material for any purpose, even commercially
+
+Under the following terms:
+
+Attribution — Give appropriate credit to PH4NTXM, provide a link to the license, and indicate if changes were made.
+
+ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license.
+
+Full license text: https://creativecommons.org/licenses/by-sa/4.0/
+
+
+2. Branding & Artwork
+
+All PH4NTXM logos, banners, icons, and other branding assets are also released under CC BY-SA 4.0.
+
+You may reuse or adapt these assets under the same terms as documentation.
+
+These licenses do not cover the operating system or software packages.
+
+
+3. Custom Scripts & Configurations
+
+PH4NTXM’s custom scripts, system tweaks, and configurations developed by the PH4NTXM team are released under the GNU General Public License v3 (GPLv3).
+
+You are free to copy, modify, and redistribute them under the same license.
+
+All derivative work must retain GPLv3 licensing.
+
+
+4. Upstream Software
+
+PH4NTXM GNU/Linux includes software packages provided by Debian and other upstream projects.
+
+PH4NTXM does not modify upstream source code beyond build configuration and packaging unless explicitly stated.
+
+Each package is distributed under its original license (GPL, LGPL, MIT, BSD, or other open-source licenses).
+
+Users must comply with the license terms of individual software packages.
+
+
+5. Summary
+
+| Component                       | License           | Notes                                   |
+| ------------------------------- | ----------------- | --------------------------------------- |
+| Documentation & Release Notes   | CC BY-SA 4.0      | Share and adapt freely with attribution |
+| Branding & Artwork              | CC BY-SA 4.0      | Same as above                           |
+| Custom Scripts & Configurations | GPLv3             | Derivatives must remain open            |
+| Upstream Software               | Original Licenses | Comply with each package’s license      |
+
+
+Non-Redistributable / EULA-bound Software:
+
+• Brave Browser: downloaded from the official Brave repository. Upstream license/EULA applies. No local copyright file included.
+• Burp Suite: must accept upstream EULA before use.
+• Metasploit (Docker): license applies from upstream.
+
+
+6. Source
+
+Source Repository: https://github.com/ph4ntxmproject/PH4NTXM
+License: GPLv3 – Fully open source and redistributable under the same terms.
+Full license text: https://www.gnu.org/licenses/gpl-3.0.html
+
+
+7. Disclaimer
+
+PH4NTXM is provided “as is”, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the authors or contributors be liable for any claim, damages, or other liability arising from the use of this software.

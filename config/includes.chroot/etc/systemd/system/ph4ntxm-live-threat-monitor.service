@@ -1,0 +1,21 @@
+[Unit]
+Description=PH4NTXM Live Threat Monitor Collector
+After=network.target systemd-tmpfiles-setup.service add-ph4ntxm-to-adm.service
+Requires=systemd-tmpfiles-setup.service add-ph4ntxm-to-adm.service
+
+[Service]
+Type=simple
+User=ph4ntxm
+Group=adm
+ExecStart=/usr/local/bin/ph4ntxm-live-threat-monitor
+Restart=always
+RestartSec=5
+
+CapabilityBoundingSet=CAP_DAC_READ_SEARCH CAP_DAC_OVERRIDE
+
+ProtectSystem=full
+ProtectHome=no
+ReadWritePaths=/tmp
+
+[Install]
+WantedBy=multi-user.target

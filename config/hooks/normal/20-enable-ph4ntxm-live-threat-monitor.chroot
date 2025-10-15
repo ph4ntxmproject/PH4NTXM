@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+systemctl daemon-reload
+
+systemctl enable ph4ntxm-live-threat-monitor.service

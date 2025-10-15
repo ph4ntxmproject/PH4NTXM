@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+import os
+import subprocess
+import json
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, Gdk
+
+STATUS_FILE = "/run/ph4ntxm-lockdown-status.json"
+UFW_PATH = "/usr/sbin/ufw"
+
+def check_root():
+    if os.geteuid() != 0:
+        dlg = Gtk.MessageDialog(None, 0, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, "Lockdown Mode")
+        dlg.format_secondary_text("Please run as root.")
+        dlg.run()
+        dlg.destroy()
+        exit(1)
+
+def read_status():
+    if os.path.exists(STATUS_FILE):
+        try:
+            with open(STATUS_FILE, "r") as f:
+                data = json.load(f)
+                return data.get("enabled", False)
+        except:
+            return False
+    return False
+
+def write_status(enabled):
+    try:
+        with open(STATUS_FILE, "w") as f:
+            json.dump({"enabled": enabled}, f)
+    except Exception as e:
+        print("Failed to write status:", e)
+
+def enable_lockdown():
+    try:
+        subprocess.run([UFW_PATH, "default", "deny", "incoming"], check=True)
+        subprocess.run([UFW_PATH, "default", "deny", "outgoing"], check=True)
+        subprocess.run([UFW_PATH, "--force", "enable"], check=True)
+        write_status(True)
+    except subprocess.CalledProcessError as e:
+        dlg = Gtk.MessageDialog(None, 0, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, "Lockdown Mode")
+        dlg.format_secondary_text(f"Failed to enable lockdown: {e}")
+        dlg.run()
+        dlg.destroy()
+        return False
+    return True
+
+def disable_lockdown():
+    try:
+        subprocess.run([UFW_PATH, "default", "allow", "incoming"], check=True)
+        subprocess.run([UFW_PATH, "default", "allow", "outgoing"], check=True)
+        subprocess.run([UFW_PATH, "--force", "enable"], check=True)
+        write_status(False)
+    except subprocess.CalledProcessError as e:
+        dlg = Gtk.MessageDialog(None, 0, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, "Lockdown Mode")
+        dlg.format_secondary_text(f"Failed to disable lockdown: {e}")
+        dlg.run()
+        dlg.destroy()
+        return False
+    return True
+
+class LockdownDialog(Gtk.Window):
+    def __init__(self):
+        Gtk.Window.__init__(self, title="Lockdown Mode")
+        self.set_border_width(20)
+        self.set_resizable(False)
+        self.override_background_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0.15,0.15,0.15,1.0))
+
+        enabled = read_status()
+        status_text = "Enabled" if enabled else "Disabled"
+        prompt_text = f"Lockdown Mode: {status_text}\nDo you want to {'disable' if enabled else 'enable'}?"
+
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
+        self.add(vbox)
+
+        label = Gtk.Label(label=prompt_text)
+        label.set_line_wrap(True)
+        label.set_justify(Gtk.Justification.CENTER)
+        label.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(1,1,1,1))
+        vbox.pack_start(label, True, True, 0)
+
+        hbox = Gtk.Box(spacing=10)
+        vbox.pack_start(hbox, True, True, 0)
+
+        btn_yes = Gtk.Button(label="Yes")
+        btn_yes.connect("clicked", self.on_yes)
+        hbox.pack_start(btn_yes, True, True, 0)
+
+        btn_no = Gtk.Button(label="No")
+        btn_no.connect("clicked", self.on_no)
+        hbox.pack_start(btn_no, True, True, 0)
+
+        self.enabled = enabled
+
+    def on_yes(self, widget):
+        if self.enabled:
+            if disable_lockdown():
+                self.close()
+        else:
+            if enable_lockdown():
+                self.close()
+
+    def on_no(self, widget):
+        self.close()
+
+def main():
+    check_root()
+    win = LockdownDialog()
+    win.connect("destroy", Gtk.main_quit)
+    win.show_all()
+    Gtk.main()
+
+if __name__ == "__main__":
+    main()

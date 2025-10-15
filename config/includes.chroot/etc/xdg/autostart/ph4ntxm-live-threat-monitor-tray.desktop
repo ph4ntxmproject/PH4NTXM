@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=PH4NTXM Live Threat Monitor (Tray)
+Exec=sh -c "sleep 5 && /usr/local/bin/ph4ntxm-live-threat-monitor-tray"
+X-GNOME-Autostart-enabled=true
+NoDisplay=false

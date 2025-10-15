@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+import os, json, signal, time
+import gi
+gi.require_version('Gtk', '3.0')
+gi.require_version('AyatanaAppIndicator3', '0.1')
+from gi.repository import Gtk, AyatanaAppIndicator3 as AppIndicator3, GLib
+
+JSON = "/tmp/ph4ntxm-threat.json"
+REFRESH = 5
+ICON_GREEN = "gtk-yes"
+ICON_RED   = "gtk-no"
+ALERT_MIN_DURATION = 600
+
+class PH4NTXMTray:
+    def __init__(self):
+        self.ind = AppIndicator3.Indicator.new(
+            "ph4ntxm-live-threat-monitor", ICON_GREEN,
+            AppIndicator3.IndicatorCategory.APPLICATION_STATUS
+        )
+        self.ind.set_status(AppIndicator3.IndicatorStatus.ACTIVE)
+        self.ind.set_icon(ICON_GREEN)
+        self.ind.set_title("PH4NTXM Live Threat Monitor")
+
+        menu = Gtk.Menu()
+        mi_show = Gtk.MenuItem(label="Show Status")
+        mi_show.connect("activate", self.show_status)
+        menu.append(mi_show)
+
+        mi_raw = Gtk.MenuItem(label="Show JSON")
+        mi_raw.connect("activate", self.show_raw)
+        menu.append(mi_raw)
+
+        mi_quit = Gtk.MenuItem(label="Quit")
+        mi_quit.connect("activate", self.quit)
+        menu.append(mi_quit)
+
+        menu.show_all()
+        self.ind.set_menu(menu)
+
+        GLib.timeout_add_seconds(REFRESH, self.update_status)
+
+    def read_json(self):
+        if not os.path.exists(JSON):
+            return None
+        try:
+            with open(JSON, "r", encoding="utf-8") as fh:
+                return json.load(fh)
+        except:
+            return None
+
+    def update_status(self):
+        data = self.read_json()
+        if not data:
+            self.ind.set_icon(ICON_GREEN)
+            return True
+
+        fails = data.get("auth_failures", 0)
+        ufw = data.get("ufw_blocks", 0)
+        bans = data.get("fail2ban_bans", 0)
+        last_alert_ts = data.get("last_alert_ts", 0)
+
+        if fails > 0 or ufw > 0 or bans > 0 or (time.time() - last_alert_ts < ALERT_MIN_DURATION):
+            self.ind.set_icon(ICON_RED)
+        else:
+            self.ind.set_icon(ICON_GREEN)
+        return True
+
+    def show_status(self, _):
+        data = self.read_json()
+        if not data:
+            txt = "No data available."
+        else:
+            txt = (f"Auth Failures: {data.get('auth_failures',0)}\n"
+                   f"UFW Blocks: {data.get('ufw_blocks',0)}\n"
+                   f"Fail2Ban Bans: {data.get('fail2ban_bans',0)}")
+        dlg = Gtk.MessageDialog(None, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "PH4NTXM Live Threat Monitor")
+        dlg.format_secondary_text(txt)
+        dlg.run()
+        dlg.destroy()
+
+    def show_raw(self, _):
+        data = self.read_json()
+        txt = json.dumps(data, indent=2) if data else "No data available."
+        dlg = Gtk.MessageDialog(None, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "PH4NTXM Live Threat Monitor Logs")
+        dlg.set_default_size(600, 400)
+        dlg.format_secondary_text(txt[:5000])
+        dlg.run()
+        dlg.destroy()
+
+    def quit(self, _):
+        Gtk.main_quit()
+
+def main():
+    PH4NTXMTray()
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+    Gtk.main()
+
+if __name__ == "__main__":
+    main()

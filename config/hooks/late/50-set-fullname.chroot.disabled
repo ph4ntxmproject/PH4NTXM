@@ -1,0 +1,3 @@
+#!/bin/sh
+# Set the descriptive full name for the live user
+chfn -f "PH4NTXM" ph4ntxm

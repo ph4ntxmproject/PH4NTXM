@@ -1,0 +1,146 @@
+#!/usr/bin/env python3
+import os, re, time, collections, json, threading
+
+AUTH_LOG = "/var/log/auth.log"
+KERN_LOG = "/var/log/kern.log"
+FAIL2BAN_LOG = "/var/log/fail2ban.log"
+OUTFILE = "/tmp/ph4ntxm-threat.json"
+INTERVAL = 5
+WINDOW   = 600
+ALERT_MIN_DURATION = 600
+
+os.makedirs(os.path.dirname(OUTFILE), exist_ok=True)
+if not os.path.exists(OUTFILE):
+    with open(OUTFILE, "w", encoding="utf-8") as f:
+        json.dump({
+            "auth_failures": 0,
+            "ufw_blocks": 0,
+            "fail2ban_bans": 0,
+            "timestamp": int(time.time()),
+            "last_alert_ts": 0
+        }, f)
+    os.chown(OUTFILE, os.getuid(), os.getgid())
+
+class SlidingCounter:
+    """Keeps counts in a sliding time window."""
+    def __init__(self, window=600):
+        self.window = window
+        self.events = collections.deque()
+
+    def add(self, ts=None):
+        if ts is None:
+            ts = time.time()
+        self.events.append(ts)
+        self.expire()
+
+    def expire(self):
+        now = time.time()
+        while self.events and now - self.events[0] > self.window:
+            self.events.popleft()
+
+    def count(self):
+        self.expire()
+        return len(self.events)
+
+def follow_file(path):
+    """Follow a log file like tail -F."""
+    while True:
+        try:
+            with open(path, "r", errors="ignore") as f:
+                f.seek(0, os.SEEK_END)
+                while True:
+                    line = f.readline()
+                    if not line:
+                        time.sleep(1)
+                        continue
+                    yield line
+        except (PermissionError, FileNotFoundError):
+            time.sleep(1)
+
+def write_json_periodically(counters):
+    """Write JSON snapshot every INTERVAL seconds."""
+    while True:
+        now = int(time.time())
+
+        last_alert_ts = 0
+        if os.path.exists(OUTFILE):
+            try:
+                with open(OUTFILE, "r", encoding="utf-8") as f:
+                    old = json.load(f)
+                    last_alert_ts = old.get("last_alert_ts", 0)
+            except:
+                pass
+
+        auth = counters['auth'].count()
+        ufw  = counters['ufw'].count()
+        f2b  = counters['f2b'].count()
+
+        active_alert = (auth > 0 or ufw > 0 or f2b > 0)
+
+        if active_alert:
+            if now - last_alert_ts > ALERT_MIN_DURATION:
+                last_alert_ts = now
+        else:
+            if now - last_alert_ts > ALERT_MIN_DURATION:
+                last_alert_ts = 0
+
+        data = {
+            "auth_failures": auth,
+            "ufw_blocks": ufw,
+            "fail2ban_bans": f2b,
+            "timestamp": now,
+            "last_alert_ts": last_alert_ts
+        }
+
+        try:
+            os.makedirs(os.path.dirname(OUTFILE), exist_ok=True)
+            tmpfile = OUTFILE + ".tmp"
+            with open(tmpfile, "w", encoding="utf-8") as f:
+                json.dump(data, f)
+            os.replace(tmpfile, OUTFILE)
+        except Exception as e:
+            print("[!] Failed to write JSON:", e)
+
+        time.sleep(INTERVAL)
+
+def main():
+    auth_counter = SlidingCounter(WINDOW)
+    ufw_counter  = SlidingCounter(WINDOW)
+    f2b_counter  = SlidingCounter(WINDOW)
+
+    re_authfail = re.compile(r"Failed (password|publickey) for .* from (\S+) port (\d+)")
+    re_ufwblock = re.compile(r"\[UFW BLOCK\] IN=.*SRC=([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+) .*DPT=(\d+)")
+    re_f2bban   = re.compile(r"Ban (\S+)\s+for (\d+)\s+seconds")
+
+    auth_lines = follow_file(AUTH_LOG)
+    kern_lines = follow_file(KERN_LOG)
+    f2b_lines  = follow_file(FAIL2BAN_LOG)
+
+    counters = {'auth': auth_counter, 'ufw': ufw_counter, 'f2b': f2b_counter}
+
+    threading.Thread(target=write_json_periodically, args=(counters,), daemon=True).start()
+
+    while True:
+        for _ in range(20):
+            try:
+                line = next(auth_lines)
+                if re_authfail.search(line):
+                    auth_counter.add()
+            except StopIteration:
+                pass
+            try:
+                line = next(kern_lines)
+                if re_ufwblock.search(line):
+                    ufw_counter.add()
+            except StopIteration:
+                pass
+            try:
+                line = next(f2b_lines)
+                if re_f2bban.search(line):
+                    f2b_counter.add()
+            except StopIteration:
+                pass
+        time.sleep(1)
+
+if __name__ == "__main__":
+    main()
