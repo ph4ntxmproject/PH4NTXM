@@ -84,5 +84,12 @@ PH4NTXM is not optimized for comfort. It is engineered for certainty.
 - **Image:** `PH4NTXM-1.1-amd64.iso`  
 - **Base:** Debian 13 “Trixie” XFCE  
 - **Architecture:** amd64  
-- **Type:** Live-only (installation not recommended for your security and system integrity)
-- **License:** GPLv3 – Fully open source and redistributable under the same terms. 
+- **Type:** Live-only (installation not recommended for your security and system integrity)  
+- **License:** GPLv3 – Fully open source and redistributable under the same terms.
+
+---
+
+## Security & Release Policy
+
+For security reasons, **only the latest PH4NTXM release** is available for public download.  
+Older versions are archived and **not maintained**, ensuring all users receive the most recent hardening and security patches.
