@@ -42,6 +42,7 @@ Applies micro-randomized clock offsets at boot to obscure temporal fingerprintin
 Custom jail configuration with transient ban, everything shown on live monitor tray.
 
 **Live Threat Monitor**
+
 A lightweight service that continuously analyzes authentication, firewall, and intrusion logs. When suspicious activity is detected, it surfaces a real-time alert in the system tray — minimal, silent, and fully local. No data leaves the machine; awareness stays on the operator’s side.
 
 **Lockdown Mode**  
