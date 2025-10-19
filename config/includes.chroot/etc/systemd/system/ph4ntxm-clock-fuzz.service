@@ -1,0 +1,12 @@
+[Unit]
+Description=Random clock skew
+DefaultDependencies=no
+After=local-fs.target
+Before=systemd-time-syncd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/ph4ntxm-clock-fuzz.sh
+
+[Install]
+WantedBy=multi-user.target

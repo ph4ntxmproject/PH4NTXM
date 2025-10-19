@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+DNS_LIST="/etc/ph4ntxm-dnslist"
+RESOLV_FILE="/etc/resolv.conf"
+
+if [ -f "$DNS_LIST" ]; then
+    RANDOM_DNS=$(shuf -n 1 "$DNS_LIST")
+    echo "nameserver $RANDOM_DNS" > "$RESOLV_FILE"
+else
+    echo "nameserver 1.1.1.1" > "$RESOLV_FILE"
+fi
+
+exit 0

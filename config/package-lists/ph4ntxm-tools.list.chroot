@@ -1,0 +1,66 @@
+# ---- Security ----
+rkhunter
+lynis
+ufw
+fail2ban
+
+# ---- Anonymity ----
+tor
+torbrowser-launcher
+wireguard-tools
+onionshare
+proxychains4
+macchanger
+# ---- Pentesting ----
+
+## 1. Recon & Scanning
+nmap
+masscan
+dnsutils
+whois
+nikto
+dirb
+gobuster
+
+## 2. Packet Capture / Network Analysis
+tcpdump
+wireshark
+netcat-openbsd
+
+## 3. Web App Testing & Exploitation
+wfuzz
+sqlmap
+whatweb
+
+## 4. Password / Credential Attacks
+hydra
+john
+hashcat
+crunch
+
+## 6. Wireless / Radio Attacks
+aircrack-ng
+
+## 7. Other
+zsh
+util-linux
+docker.io
+secure-delete
+live-config
+live-config-systemd
+firmware-linux
+firmware-linux-nonfree
+firmware-misc-nonfree
+network-manager
+network-manager-gnome
+linux-image-amd64
+live-boot
+systemd-sysv
+openjdk-21-jre
+jq
+nftables
+python3
+python3-gi
+gir1.2-ayatanaappindicator3-0.1
+gir1.2-gtk-3.0
+libnotify-bin

@@ -1,0 +1,2 @@
+#!/bin/sh
+systemctl enable add-ph4ntxm-to-adm.service

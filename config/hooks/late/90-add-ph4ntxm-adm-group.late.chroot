@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+# Add ph4ntxm to adm group
+usermod -aG adm ph4ntxm

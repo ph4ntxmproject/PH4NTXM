@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=PH4NTXM Lockdown Mode
+Comment=Toggle Lockdown Mode
+Exec=sudo /usr/local/bin/ph4ntxm-lockdown
+Icon=changes-prevent
+Terminal=false
+Categories=X-XFCE;X-Xfce-Toplevel;
+StartupNotify=false

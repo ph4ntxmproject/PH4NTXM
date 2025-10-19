@@ -1,0 +1,7 @@
+#!/bin/sh
+chmod +x /usr/local/bin/ph4ntxm-lockdown
+chmod +x /usr/local/bin/ph4ntxm-lockdown-tray
+chmod +x /usr/local/bin/ph4ntxm-lockdown*
+
+update-desktop-database
+gtk-update-icon-cache /usr/share/icons/hicolor
