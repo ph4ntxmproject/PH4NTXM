@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -e
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get update
+
+PACKAGES=(
+    dictionary
+    exfalso
+    quodlibet
+    parole
+    plymouth
+    firefox-esr
+)
+
+for pkg in "${PACKAGES[@]}"; do
+    if dpkg-query -W -f='${Status}' "$pkg" 2>/dev/null | grep -q "install ok installed"; then
+        apt-get purge -y "$pkg" || true
+    fi
+done
+
+for pkg in $(dpkg -l 'libreoffice*' 2>/dev/null | awk '/^ii/ {print $2}'); do
+    apt-get purge -y "$pkg" || true
+done
+
+for pkg in $(dpkg -l 'plymouth-theme-*' 2>/dev/null | awk '/^ii/ {print $2}'); do
+    apt-get purge -y "$pkg" || true
+done
+
+apt-get autoremove -y || true
+apt-get clean || true
