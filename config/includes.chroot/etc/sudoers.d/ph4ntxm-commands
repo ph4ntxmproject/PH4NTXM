@@ -1,0 +1,7 @@
+Cmnd_Alias PH4NTXM_CMDS = \
+  /usr/local/bin/ph4ntxm-lockdown, \
+  /usr/local/bin/ph4ntxm-lockdown-tray, \
+  /usr/local/bin/ph4ntxm-panic, \
+  /usr/local/bin/ph4ntxm-panic-tray
+
+ph4ntxm ALL=(root) NOPASSWD: PH4NTXM_CMDS
