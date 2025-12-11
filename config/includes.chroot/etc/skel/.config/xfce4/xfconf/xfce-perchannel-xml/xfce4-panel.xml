@@ -63,6 +63,7 @@
       <property name="show-category-icons" type="bool" value="true"/>
       <property name="favorites" type="array">
         <value type="string" value="xfce4-terminal.desktop"/>
+        <value type="string" value="ph4ntxm-identity.desktop"/>
         <value type="string" value="ph4ntxm-lockdown.desktop"/>
         <value type="string" value="ph4ntxm-panic.desktop"/>
       </property>

@@ -1,102 +1,111 @@
-# PH4NTXM — Official Distribution
+# **PH4NTXM — Official Distribution**
 
 **Freedom • Security • Anonymity • Purpose • Pentest-Ready**
 
 ---
 
-## OVERVIEW
+## **OVERVIEW**
 
-PH4NTXM 1.2 “Dark Matter” refines the system into a smaller, faster, and more autonomous framework.
-This release reduces total size to **2.0 GB** and integrates a new translucent panel for cleaner visual cohesion.
+PH4NTXM 1.3 “Zero Point” continues the project’s evolution toward a smaller, cleaner, and more adaptive live system.
+This release introduces a full visual refinement pass, an upgraded identity-randomization engine, and updated hardening across the stack — all while keeping the ISO lean at **2.0 GB**.
 
-Every byte, boot process, and service has been re-evaluated for stealth, consistency, and operator speed.
-Dark Matter represents density — the invisible structure that holds everything together while revealing nothing.
+The interface now carries a unified cyan theme, and PH4NTXM-specific tools adopt a neon dual-tone cyan/magenta identity for immediate recognition. Session flow is tighter, visual noise reduced, and operator awareness improved.
 
----
-
-## SYSTEM ARCHITECTURE
-
-* **Live-only execution** — zero persistence, total volatility
-* **Debian 13 (Trixie) XFCE base** — retained for stability and auditability
-* **Kernel hardening and firewall defaults** — optimized for minimal surface exposure
-* **Parallelized system services** — faster boot and lower idle footprint
-* **Optimized system weight** — lighter ISO, fewer dependencies, tighter runtime
+Zero Point represents the moment before movement — a calm, controlled reset that prepares each session to begin as someone new, somewhere new.
 
 ---
 
-## SECURITY FRAMEWORK
+## **SYSTEM ARCHITECTURE**
+
+* **Live-only execution** — total volatility, no persistence, no residue
+* **Debian 13 (Trixie) XFCE base** — chosen for stability, auditability, and reproducible behavior
+* **Kernel hardening and firewall defaults** — reduced exposure and predictable defense surfaces
+* **Parallelized system services** — faster initialization and lower idle overhead
+* **Refined system footprint** — leaner dependencies, optimized boot flow, consistent runtime memory profile
+
+---
+
+## **SECURITY FRAMEWORK**
 
 **Lockdown Mode**
-A root-protected isolation toggle that disables all network interfaces instantly, remaining sealed until manually reactivated.
+A protected switch that disables all network interfaces instantly and keeps them sealed until manually restored.
 
 **Panic Button**
-Emergency failsafe that kills all user processes, wipes caches and memory, cuts network interfaces, and powers down securely.
+A rapid failsafe that terminates user processes, wipes caches and volatile traces, drops interfaces, and powers down cleanly.
+
+**PH4NTXM Identity**
+A read-only tray utility that displays the current boot’s randomized identity, including hostname, MAC addresses, and visible locale traits, without exposing any sensitive internals.
 
 **Dynamic Identity Obfuscation**
-Rotates hostname, MAC addresses, machine-id, and SSH keys at each boot to prevent host-level correlation.
+Hostname, machine-id, SSH keys, and MAC addresses rotate at each boot, preventing cross-session linkage.
+
+**Global Identity Randomization**
+PH4NTXM now generates complete boot identities using a large, diverse corpus of real human names from across the world.
+Session personas blend naturally into different environments, appearing plausible and region-agnostic.
 
 **Network Fingerprint Randomization**
-Modifies TCP/IP stack parameters (TTL, timestamps, and signature behavior) to obscure network fingerprints.
+TCP/IP properties such as TTL, timestamps, and signature behavior are mutated to disrupt passive fingerprinting.
 
 **Rotating DNS Resolver System**
-Selects a randomized resolver at boot to reduce DNS-route linkage between sessions.
+A randomized resolver is selected each boot to reduce cross-session correlation.
 
 **Clock Skewing Mechanism**
-Applies subtle randomized time offsets during startup to hinder time-based fingerprinting.
+Subtle time offsets are applied at startup to further harden fingerprint evasion.
 
 **Firewall & Brute-Force Defense**
-UFW defaults refined; Fail2Ban operates with ephemeral RAM-based ban logs — no persistence, no leftover data.
+UFW defaults refined; Fail2Ban runs entirely in RAM, leaving no persistent logs or residual metadata.
 
 ---
 
-## INTERFACE & WORKFLOW
+## **INTERFACE & WORKFLOW**
 
-* **Transparent panel** — new semi-translucent interface blending with the desktop for low-distraction focus
-* **Neon-Dark theme** — improved contrast and glow dynamics for low-light clarity
-* **Icon Evolution** — broad overhaul of system and tool icons, covering security, anonymity, pentest utilities and core UI elements
-* **Reactive PH4NTXM icons** — Lockdown, and Panic with glow-state indicators
-* **Whisker Menu** — retained for speed and logical category structure
-* **Brave Browser default** — lighter footprint, hardened privacy baseline
-
----
-
-## OPERATIONAL TOOLSET
-
-PH4NTXM retains all essential network, forensic, and anonymity utilities while removing redundancy for faster runtime validation and more predictable execution.
-Streamlined — yet complete.
+* **Unified visual identity** — consistent cyan palette, corrected icon sizes across the system
+* **PH4NTXM toolset recolor** — neon cyan/magenta dual-tone marking all operator tools
+* **Transparent panel** — cleaner visual layering and reduced distraction
+* **Neon-Dark theme** — improved low-light clarity and contrast
+* **Refined iconography** — adjusted geometry for folders, core apps, and security utilities
+* **Whisker Menu** — retained for speed, minimal depth, and predictable categorization
+* **Brave Browser default** — hardened baseline with reduced tracking surface
 
 ---
 
-## DESIGN PRINCIPLES
+## **OPERATIONAL TOOLSET**
 
-1. **Security by default** — protections active from first boot
-2. **Stateless operation** — all logs and identifiers are ephemeral
-3. **Operator sovereignty** — no telemetry, no silent communication
-4. **Verifiability** — open source, auditable, and transparent
-
-PH4NTXM is engineered for certainty, not comfort.
+PH4NTXM maintains a curated, essential toolkit for network analysis, forensics, anonymity workflows, and offensive research.
+Tools are selected for consistency, speed, and low interaction footprint. Redundancy is eliminated in favor of predictable behavior and fast validation.
 
 ---
 
-## BUILD INFORMATION
+## **DESIGN PRINCIPLES**
 
-* **Release:** PH4NTXM 1.2 — Dark Matter
-* **Image:** `PH4NTXM-1.2-amd64.iso`
+1. **Security by default** — no loose ends, no silent services
+2. **Stateless operation** — every session begins at zero and ends without trace
+3. **Operator sovereignty** — no telemetry, no external calls, no opaque decisions
+4. **Verifiability** — fully open source, reproducible, and auditable
+
+PH4NTXM prioritizes certainty over comfort.
+
+---
+
+## **BUILD INFORMATION**
+
+* **Release:** PH4NTXM 1.3 — Zero Point
+* **Image:** `PH4NTXM-1.3-amd64.iso`
 * **Base:** Debian 13 “Trixie” XFCE
 * **Architecture:** amd64
 * **Size:** 2.0 GB
-* **Release Date:** 2025-11-17
-* **Type:** Live-only (installation not recommended for your security and system integrity)
-* **Checksum (SHA256):** `35f219add249c1b5d6fcd6c618e765e0c04cee0098d9094fb3fc2b380df8cd25`
-* **License:** GPLv3 – Fully open source and redistributable under the same terms
+* **Release Date:** 2025-12-12
+* **Type:** Live-only (installation discouraged; breaks security guarantees)
+* **Checksum (SHA256):** `bfbb3774d1843f23646af7ac6a2ae0854e42ac65c80ea3569a2e92b0eb2f1103`
+* **License:** GPLv3 — Fully open source and redistributable
 * **Source Repository:** [https://github.com/ph4ntxmproject/PH4NTXM](https://github.com/ph4ntxmproject/PH4NTXM)
 
 ---
 
-## SECURITY & RELEASE POLICY
+## **SECURITY & RELEASE POLICY**
 
-For operational integrity, **only the latest PH4NTXM release** is available for download.
-Older versions are archived, **not maintained**, and should not be used for live operations.
-Always verify checksums, audit builds, and assume persistence equals exposure.
-PH4NTXM is engineered to run in live mode only.
-Installation on a hard drive or unsupported virtualization configuration is not recommended and may void security guarantees.
+For operational consistency, **only the latest PH4NTXM version** is published for download.
+Older releases are archived, not maintained, and should not be used for active operations.
+
+Always verify signatures and checksums, inspect source changes, and assume persistence equals exposure.
+PH4NTXM is engineered for live-only use — installation on non-volatile storage or unsupported virtualization setups compromises the system model.

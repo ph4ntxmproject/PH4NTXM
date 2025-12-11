@@ -1,6 +1,6 @@
+#!/bin/sh
 chmod +x /usr/local/bin/ph4ntxm-panic
 chmod +x /usr/local/bin/ph4ntxm-panic-tray
 
 update-desktop-database
-gtk-update-icon-cache /usr/share/icons/hicolor
-
+gtk-update-icon-cache /usr/share/icons/Lyra-blue-dark
