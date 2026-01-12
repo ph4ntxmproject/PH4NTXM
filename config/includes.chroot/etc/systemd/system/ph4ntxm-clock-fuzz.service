@@ -1,5 +1,5 @@
 [Unit]
-Description=Random clock skew
+Description=PH4NTXM Clock Fuzz
 DefaultDependencies=no
 After=local-fs.target
 Before=systemd-time-syncd.service

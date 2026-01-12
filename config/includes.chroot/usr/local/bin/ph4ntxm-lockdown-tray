@@ -25,11 +25,11 @@ class LockdownTray:
         self.ind.set_status(AppIndicator3.IndicatorStatus.ACTIVE)
 
         self.menu = Gtk.Menu()
-        self.mi_enable = Gtk.MenuItem(label="Enable Lockdown Mode")
+        self.mi_enable = Gtk.MenuItem(label="Enable Lockdown")
         self.mi_enable.connect("activate", self.enable_lockdown)
         self.menu.append(self.mi_enable)
 
-        self.mi_disable = Gtk.MenuItem(label="Disable Lockdown Mode")
+        self.mi_disable = Gtk.MenuItem(label="Disable Lockdown")
         self.mi_disable.connect("activate", self.disable_lockdown)
         self.menu.append(self.mi_disable)
 
@@ -55,7 +55,7 @@ class LockdownTray:
 
     def _apply_state(self, enabled):
         self.ind.set_icon(ICON_ENABLED if enabled else ICON_DISABLED)
-        self.ind.set_title(f"PH4NTXM Lockdown Mode: {'Enabled' if enabled else 'Disabled'}")
+        self.ind.set_title(f"PH4NTXM Lockdown: {'Enabled' if enabled else 'Disabled'}")
         self.mi_enable.set_sensitive(not enabled)
         self.mi_disable.set_sensitive(enabled)
 

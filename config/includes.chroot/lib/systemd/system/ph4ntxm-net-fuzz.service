@@ -1,0 +1,19 @@
+[Unit]
+Description=PH4NTXM Network Behavior Fuzzer
+After=network-online.target
+Wants=network-online.target
+ConditionKernelCommandLine=!ph4ntxm.nofuzz
+
+[Service]
+Type=simple
+ExecStart=/usr/local/sbin/ph4ntxm-net-fuzz.sh
+Restart=always
+RestartSec=30
+KillMode=process
+NoNewPrivileges=yes
+ProtectSystem=full
+ProtectHome=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

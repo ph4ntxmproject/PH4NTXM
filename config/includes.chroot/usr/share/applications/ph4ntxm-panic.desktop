@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=PH4NTXM Panic Button
-Comment=Emergency button to nuke network/processes/tmp and force shutdown
-Exec=sudo /usr/local/bin/ph4ntxm-panic
-Icon=ph4ntxm-panic
-Terminal=false
-Categories=System;X-XFCE;X-Xfce-Toplevel;

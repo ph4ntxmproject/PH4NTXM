@@ -1,5 +1,5 @@
 [Unit]
-Description=Add ph4ntxm to adm group at first boot
+Description=Add ph4ntxm To Adm
 After=systemd-user-sessions.service
 
 [Service]

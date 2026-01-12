@@ -2,8 +2,8 @@
 autoload -Uz colors && colors
 setopt prompt_subst
 
-C_ICE='%F{81}'
-C_PURPLE='%F{135}'
+C_ICE='%F{39}'
+C_PURPLE='%F{201}'
 C_ERR='%F{160}'
 C_TXT='%F{250}'
 C_RESET='%f'

@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+gcc -O2 -static \
+  /usr/local/sbin/ph4ntxm-ram-seeding-engine.c \
+  -o /usr/local/sbin/ph4ntxm-ram-seeding-engine
+
+strip /usr/local/sbin/ph4ntxm-ram-seeding-engine
+rm -f /usr/local/sbin/ph4ntxm-ram-seeding-engine.c

@@ -1,0 +1,29 @@
+#!/bin/sh
+set -e
+
+KVER=$(ls /boot/vmlinuz-* | sed 's|.*/vmlinuz-||')
+
+mkdir -p /boot/nuke
+mkdir -p /tmp/ramnuke
+
+cat > /tmp/ramnuke/init <<'EOF'
+#!/bin/busybox sh
+
+mount -t proc none /proc
+mount -t sysfs none /sys
+mount -t devtmpfs none /dev
+
+busybox reboot -f || true
+busybox poweroff -f || true
+EOF
+
+chmod +x /tmp/ramnuke/init
+
+(
+    cd /tmp/ramnuke
+    find . | cpio -H newc -o | gzip > /boot/nuke/initrd-nuke.img
+)
+
+cp /boot/vmlinuz-$KVER /boot/nuke/vmlinuz-nuke
+
+rm -rf /tmp/ramnuke

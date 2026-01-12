@@ -1,0 +1,6 @@
+[Unit]
+Description=PH4NTXM Poweroff Panic
+DefaultDependencies=no
+Requires=ph4ntxm-panic.service
+After=ph4ntxm-panic.service
+AllowIsolate=yes

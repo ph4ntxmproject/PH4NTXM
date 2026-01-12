@@ -1,0 +1,14 @@
+Unit]
+Description=PH4NTXM Hard Panic
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'sync; echo 1 > /proc/sys/kernel/sysrq; echo c > /proc/sysrq-trigger'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=poweroff.target
+WantedBy=reboot.target
+WantedBy=halt.target
+WantedBy=shutdown.target

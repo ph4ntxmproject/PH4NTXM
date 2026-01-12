@@ -1,0 +1,14 @@
+[Unit]
+Description=PH4NTXM RAM Nuke
+DefaultDependencies=no
+Before=umount.target shutdown.target
+Conflicts=umount.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/ph4ntxm-ram-nuke.sh
+
+[Install]
+WantedBy=halt.target
+WantedBy=reboot.target
+WantedBy=poweroff.target

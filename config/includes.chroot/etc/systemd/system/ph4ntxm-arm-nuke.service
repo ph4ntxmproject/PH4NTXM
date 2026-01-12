@@ -1,0 +1,15 @@
+[Unit]
+Description=PH4NTXM Nuke Kernel Arming
+DefaultDependencies=no
+After=local-fs.target
+Before=sysinit.target
+Before=basic.target
+Before=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/ph4ntxm-ram-nuke.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=sysinit.target

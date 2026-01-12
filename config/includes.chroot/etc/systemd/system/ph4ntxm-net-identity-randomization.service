@@ -1,0 +1,12 @@
+[Unit]
+Description=PH4NTXM Network Identity Randomization
+DefaultDependencies=no
+After=proc-sys-fs.mount
+Before=network-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/ph4ntxm-net-identity-randomization.sh
+
+[Install]
+WantedBy=multi-user.target

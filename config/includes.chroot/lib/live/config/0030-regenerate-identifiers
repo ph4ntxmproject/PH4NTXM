@@ -1,5 +1,0 @@
-#!/bin/sh
-
-if [ -x /usr/local/sbin/regenerate-identifiers.sh ]; then
-    /usr/local/sbin/regenerate-identifiers.sh
-fi

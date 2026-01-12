@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+if [ ! -f /etc/systemd/system/ph4ntxm-arm-nuke.service ]; then
+    echo "[-] PH4NTXM: unit missing!"
+    exit 1
+fi
+
+systemctl enable ph4ntxm-arm-nuke.service
+
+systemctl is-enabled ph4ntxm-arm-nuke.service || exit 1

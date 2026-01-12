@@ -11,7 +11,7 @@ UFW_PATH = "/usr/sbin/ufw"
 
 def check_root():
     if os.geteuid() != 0:
-        dlg = Gtk.MessageDialog(None, 0, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, "Lockdown Mode")
+        dlg = Gtk.MessageDialog(None, 0, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, "Lockdown")
         dlg.format_secondary_text("Please run as root.")
         dlg.run()
         dlg.destroy()
@@ -41,7 +41,7 @@ def enable_lockdown():
         subprocess.run([UFW_PATH, "--force", "enable"], check=True)
         write_status(True)
     except subprocess.CalledProcessError as e:
-        dlg = Gtk.MessageDialog(None, 0, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, "Lockdown Mode")
+        dlg = Gtk.MessageDialog(None, 0, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, "Lockdown")
         dlg.format_secondary_text(f"Failed to enable lockdown: {e}")
         dlg.run()
         dlg.destroy()
@@ -55,7 +55,7 @@ def disable_lockdown():
         subprocess.run([UFW_PATH, "--force", "enable"], check=True)
         write_status(False)
     except subprocess.CalledProcessError as e:
-        dlg = Gtk.MessageDialog(None, 0, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, "Lockdown Mode")
+        dlg = Gtk.MessageDialog(None, 0, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, "Lockdown")
         dlg.format_secondary_text(f"Failed to disable lockdown: {e}")
         dlg.run()
         dlg.destroy()
@@ -64,14 +64,13 @@ def disable_lockdown():
 
 class LockdownDialog(Gtk.Window):
     def __init__(self):
-        Gtk.Window.__init__(self, title="Lockdown Mode")
+        Gtk.Window.__init__(self, title="Lockdown")
         self.set_border_width(20)
         self.set_resizable(False)
-        self.override_background_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0.15,0.15,0.15,1.0))
 
         enabled = read_status()
         status_text = "Enabled" if enabled else "Disabled"
-        prompt_text = f"Lockdown Mode: {status_text}\nDo you want to {'disable' if enabled else 'enable'}?"
+        prompt_text = f"Lockdown: {status_text}\nDo you want to {'disable' if enabled else 'enable'}?"
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
         self.add(vbox)
@@ -79,7 +78,6 @@ class LockdownDialog(Gtk.Window):
         label = Gtk.Label(label=prompt_text)
         label.set_line_wrap(True)
         label.set_justify(Gtk.Justification.CENTER)
-        label.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(1,1,1,1))
         vbox.pack_start(label, True, True, 0)
 
         hbox = Gtk.Box(spacing=10)

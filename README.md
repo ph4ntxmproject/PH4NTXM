@@ -1,111 +1,140 @@
-# **PH4NTXM — Official Distribution**
+# PH4NTXM
 
-**Freedom • Security • Anonymity • Purpose • Pentest-Ready**
+**PH4NTXM** is a live-only, stateless Linux operating system engineered for hostile and forensic-adversarial environments.  
+It enforces amnesia by design: no persistence, no safe shutdown, no stable identity, and no reliable memory after exit.
 
----
-
-## **OVERVIEW**
-
-PH4NTXM 1.3 “Zero Point” continues the project’s evolution toward a smaller, cleaner, and more adaptive live system.
-This release introduces a full visual refinement pass, an upgraded identity-randomization engine, and updated hardening across the stack — all while keeping the ISO lean at **2.0 GB**.
-
-The interface now carries a unified cyan theme, and PH4NTXM-specific tools adopt a neon dual-tone cyan/magenta identity for immediate recognition. Session flow is tighter, visual noise reduced, and operator awareness improved.
-
-Zero Point represents the moment before movement — a calm, controlled reset that prepares each session to begin as someone new, somewhere new.
+PH4NTXM abandons the assumption that systems should recover.
 
 ---
 
-## **SYSTEM ARCHITECTURE**
+## What PH4NTXM Is
 
-* **Live-only execution** — total volatility, no persistence, no residue
-* **Debian 13 (Trixie) XFCE base** — chosen for stability, auditability, and reproducible behavior
-* **Kernel hardening and firewall defaults** — reduced exposure and predictable defense surfaces
-* **Parallelized system services** — faster initialization and lower idle overhead
-* **Refined system footprint** — leaner dependencies, optimized boot flow, consistent runtime memory profile
+PH4NTXM boots into a fully functional Linux environment intended to exist briefly and then disappear.
 
----
+Each session is isolated, volatile, and disposable.  
+Shutdown, reboot, panic, and failure are treated as compromise events and are routed through enforced destruction paths.
 
-## **SECURITY FRAMEWORK**
-
-**Lockdown Mode**
-A protected switch that disables all network interfaces instantly and keeps them sealed until manually restored.
-
-**Panic Button**
-A rapid failsafe that terminates user processes, wipes caches and volatile traces, drops interfaces, and powers down cleanly.
-
-**PH4NTXM Identity**
-A read-only tray utility that displays the current boot’s randomized identity, including hostname, MAC addresses, and visible locale traits, without exposing any sensitive internals.
-
-**Dynamic Identity Obfuscation**
-Hostname, machine-id, SSH keys, and MAC addresses rotate at each boot, preventing cross-session linkage.
-
-**Global Identity Randomization**
-PH4NTXM now generates complete boot identities using a large, diverse corpus of real human names from across the world.
-Session personas blend naturally into different environments, appearing plausible and region-agnostic.
-
-**Network Fingerprint Randomization**
-TCP/IP properties such as TTL, timestamps, and signature behavior are mutated to disrupt passive fingerprinting.
-
-**Rotating DNS Resolver System**
-A randomized resolver is selected each boot to reduce cross-session correlation.
-
-**Clock Skewing Mechanism**
-Subtle time offsets are applied at startup to further harden fingerprint evasion.
-
-**Firewall & Brute-Force Defense**
-UFW defaults refined; Fail2Ban runs entirely in RAM, leaving no persistent logs or residual metadata.
+The system is designed so that nothing meaningful survives the session.
 
 ---
 
-## **INTERFACE & WORKFLOW**
+## Operating Assumptions
 
-* **Unified visual identity** — consistent cyan palette, corrected icon sizes across the system
-* **PH4NTXM toolset recolor** — neon cyan/magenta dual-tone marking all operator tools
-* **Transparent panel** — cleaner visual layering and reduced distraction
-* **Neon-Dark theme** — improved low-light clarity and contrast
-* **Refined iconography** — adjusted geometry for folders, core apps, and security utilities
-* **Whisker Menu** — retained for speed, minimal depth, and predictable categorization
-* **Brave Browser default** — hardened baseline with reduced tracking surface
+PH4NTXM is designed for environments where:
 
----
-
-## **OPERATIONAL TOOLSET**
-
-PH4NTXM maintains a curated, essential toolkit for network analysis, forensics, anonymity workflows, and offensive research.
-Tools are selected for consistency, speed, and low interaction footprint. Redundancy is eliminated in favor of predictable behavior and fast validation.
+- Post-mortem analysis is expected rather than hypothetical
+- Hardware cannot be fully trusted
+- Memory may be captured or inspected
+- Identity correlation across sessions is a real threat
+- Failure must not preserve state
 
 ---
 
-## **DESIGN PRINCIPLES**
+## System Orientation
 
-1. **Security by default** — no loose ends, no silent services
-2. **Stateless operation** — every session begins at zero and ends without trace
-3. **Operator sovereignty** — no telemetry, no external calls, no opaque decisions
-4. **Verifiability** — fully open source, reproducible, and auditable
+PH4NTXM is engineered around volatility and controlled termination.
 
-PH4NTXM prioritizes certainty over comfort.
+The system favors clean session boundaries, enforced teardown, and ephemeral execution over continuity or accumulation.  
+Its behavior reflects the assumption that recovery, retention, and long-lived state increase risk rather than reduce it.
 
 ---
 
-## **BUILD INFORMATION**
+## System Guarantees
 
-* **Release:** PH4NTXM 1.3 — Zero Point
-* **Image:** `PH4NTXM-1.3-amd64.iso`
-* **Base:** Debian 13 “Trixie” XFCE
-* **Architecture:** amd64
-* **Size:** 2.0 GB
-* **Release Date:** 2025-12-12
-* **Type:** Live-only (installation discouraged; breaks security guarantees)
-* **Checksum (SHA256):** `bfbb3774d1843f23646af7ac6a2ae0854e42ac65c80ea3569a2e92b0eb2f1103`
-* **License:** GPLv3 — Fully open source and redistributable
-* **Source Repository:** [https://github.com/ph4ntxmproject/PH4NTXM](https://github.com/ph4ntxmproject/PH4NTXM)
+PH4NTXM is engineered to maintain the following conditions:
+
+- **Stateless operation**  
+  System, user, and network state are not expected to survive reboot.
+
+- **No safe exit paths**  
+  Poweroff, reboot, panic, and crash converge on the same enforced memory destruction mechanism.
+
+- **Forensic resistance**  
+  System memory is actively polluted with plausible but false artifacts, making post-mortem analysis unreliable and non-deterministic.
+
+- **Ephemeral identity**  
+  Hostname, machine identifiers, cryptographic material, network fingerprints, and timing behavior are regenerated every session.
+
+- **Silent hardware surfaces**  
+  Selected physical sensors (such as microphone, camera, and audio output) are removed at the kernel level and are inaccessible to userspace.
+
+These properties are enforced architecturally, not exposed as user options.
 
 ---
 
-## **SECURITY & RELEASE POLICY**
+## How the System Is Structured
 
-For operational consistency, **only the latest PH4NTXM version** is published for download.
-Older releases are archived, not maintained, and should not be used for active operations.
+PH4NTXM is assembled so that evading destruction is difficult by design:
 
-Always verify signatures and checksums, inspect source changes, and assume persistence equals exposure.
-PH4NTXM is engineered for live-only use — installation on non-volatile storage or unsupported virtualization setups compromises the system model.
+- **Live execution base**  
+  A reproducible, auditable system that operates entirely from volatile memory.
+
+- **Last-resort kernel**  
+  A dedicated panic (“nuke”) kernel is invoked via `kexec` to guarantee memory disposal independent of userland state.
+
+- **Enforcement layer**  
+  Mandatory system services responsible for memory contamination, identity rotation, network and clock disruption, and control of shutdown paths.
+
+- **Operator controls**  
+  Explicit tools for panic shutdown, network lockdown, and inspection of the current session identity.
+
+Initialization and shutdown are wired so that partial failure still converges on erasure.
+
+---
+
+## Live-Only Operation
+
+PH4NTXM is engineered to operate exclusively in live mode.
+
+The system treats state as disposable by design. Shutdown, reboot, and failure paths favor teardown over recovery, and volatile data is not preserved between sessions. This behavior is intentional and central to the system’s threat model.
+
+Installation to internal storage or use in unsupported persistent virtualization environments is not part of the intended design and may alter or weaken the system’s security guarantees.
+
+Each session begins clean and ends clean.  
+Operators are expected to verify image integrity, audit the build when possible, and treat any persistent media as hostile by default.
+
+---
+
+## Legal and Responsible Use
+
+PH4NTXM is provided for lawful security research, system auditing, and authorized testing.
+
+Use of the system or any included tools against infrastructure without explicit permission from its owners may be unlawful.  
+All responsibility for usage rests with the operator.
+
+Complete legal notice terms are provided in the `LEGAL NOTICE` file distributed with the official PH4NTXM `.iso` and `DOCUMENTS-VERIFICATION.zip`.
+
+---
+
+## Project Status
+
+PH4NTXM is a security-focused, research-driven operating system.
+
+- Actively developed
+- Intentionally sharp-edged
+- Subject to breaking changes
+- Provided without warranty
+
+It assumes an informed and competent operator.
+
+---
+
+## Downloads
+
+Official PH4NTXM release images and verification materials are published via the project website:
+
+`https://ph4ntxmproject.github.io`
+
+---
+
+## License
+
+PH4NTXM is fully open source.
+
+- Custom scripts and system components: **GNU GPLv3**
+- Documentation and artwork: **CC BY-SA 4.0**
+- Upstream software: distributed under their respective licenses
+
+Complete licensing terms are provided in the `LICENSE` file distributed with the official PH4NTXM `.iso` and `DOCUMENTS-VERIFICATION.zip`.
+
+

@@ -1,11 +1,18 @@
 PH4NTXM — CREDITS
 
+Themes:
+
+Desktop Theme: Midnight
+Author: i-mint
+License: GPLv3
+Source: https://github.com/i-mint/midnight
+
 Icons:
 
 Icon Theme: Lyra Blue Dark (modified for PH4NTXM)
 Author: yeyushengfan258
 License: GPLv3
-Source: https://store.kde.org/p/1460991
+Source: https://github.com/yeyushengfan258/Lyra-icon-theme
 
 Additional Icon Resources: Reshot (modified for PH4NTXM)
 Attribution provided voluntarily
@@ -17,4 +24,4 @@ Cursor:
 Cursor Theme: LyraB Cursors
 Author: yeyushengfan258
 License: GPLv3
-Source: https://store.kde.org/p/1524406
+Source: https://github.com/yeyushengfan258/Lyra-Cursors

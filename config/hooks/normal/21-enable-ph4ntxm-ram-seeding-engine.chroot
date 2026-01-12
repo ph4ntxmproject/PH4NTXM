@@ -1,0 +1,3 @@
+#!/bin/sh
+set -e
+systemctl enable ph4ntxm-ram-seeding-engine

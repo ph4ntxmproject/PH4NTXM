@@ -18,7 +18,7 @@
         <Filename>xfce4-file-manager.desktop</Filename>
         <Filename>xfce4-terminal.desktop</Filename>
         <Filename>ph4ntxm-lockdown.desktop</Filename>
-        <Filename>ph4ntxm-panic.desktop</Filename>
+        <Filename>ph4ntxm-panic-button.desktop</Filename>
 
         <Separator/>
         <!-- Settings block -->

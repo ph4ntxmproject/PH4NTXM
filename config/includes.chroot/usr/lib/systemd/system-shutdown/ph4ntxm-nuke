@@ -1,0 +1,5 @@
+#!/bin/sh
+echo 1 > /proc/sys/kernel/sysrq
+sync
+echo 3 > /proc/sys/vm/drop_caches
+echo c > /proc/sysrq-trigger

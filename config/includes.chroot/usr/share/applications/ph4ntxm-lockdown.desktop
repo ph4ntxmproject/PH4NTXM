@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=PH4NTXM Lockdown Mode
-Comment=Toggle Lockdown Mode
+Name=PH4NTXM Lockdown
+Comment=Toggle Lockdown
 Exec=sudo /usr/local/bin/ph4ntxm-lockdown
 Icon=ph4ntxm-lockdown
 Terminal=false

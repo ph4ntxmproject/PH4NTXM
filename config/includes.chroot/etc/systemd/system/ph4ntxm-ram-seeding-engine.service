@@ -1,0 +1,19 @@
+[Unit]
+Description=PH4NTXM RAM Seeding Engine
+DefaultDependencies=no
+After=local-fs.target
+Before=sysinit.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/sbin/ph4ntxm-ram-seeding-engine
+Restart=always
+RestartSec=0
+LimitMEMLOCK=infinity
+OOMScoreAdjust=-1000
+Nice=-10
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=sysinit.target

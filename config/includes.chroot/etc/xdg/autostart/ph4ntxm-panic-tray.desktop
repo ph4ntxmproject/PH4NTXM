@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=PH4NTXM Panic Tray
-Exec=/usr/local/bin/ph4ntxm-panic-tray
-Icon=ph4ntxm-panic
-Comment=PH4NTXM Panic Button Tray
-X-GNOME-Autostart-enabled=true
