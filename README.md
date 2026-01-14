@@ -1,5 +1,3 @@
----
-
 # PH4NTXM
 
 **PH4NTXM** is a live-only, stateless Linux operating system engineered for hostile and forensic-adversarial environments.
@@ -130,5 +128,3 @@ PH4NTXM is fully open source.
 * Upstream software: distributed under their respective licenses
 
 Complete licensing terms are provided in the **`LICENSE`** file in the Github repository and are included unchanged with all official PH4NTXM release artifacts.
-
----
