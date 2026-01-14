@@ -1,6 +1,4 @@
 # ---- Security ----
-rkhunter
-lynis
 ufw
 fail2ban
 

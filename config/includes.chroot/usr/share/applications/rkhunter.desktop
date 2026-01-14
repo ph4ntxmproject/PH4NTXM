@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Rootkit Hunter
-Comment=Run Rootkit Hunter integrity check inside a terminal
-Exec=xfce4-terminal --hold -e "zsh -c 'echo -e \"\033[1;36m[+] Welcome to PH4NTXM OS.\033[0m\n\033[1;36m[+] Beginning automated integrity checks with Rootkit Hunter.\033[0m\n\033[1;36m[+] Stay secure, stay safe, stay PH4NTXM.\033[0m\"; sudo rkhunter --check; exec zsh'"
-Terminal=false
-Icon=ph4ntxm-rkhunter
-Categories=SecurityPH4NTXM;

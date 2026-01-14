@@ -2,15 +2,56 @@
 set -e
 export DEBIAN_FRONTEND=noninteractive
 
-apt-get purge -y \
-  gcc g++ \
-  binutils \
-  build-essential \
-  make \
-  libc6-dev linux-libc-dev \
-  dpkg-dev pkg-config \
-  autoconf automake libtool \
-  || true
+apt-mark manual \
+  ufw \
+  fail2ban \
+  tor \
+  torbrowser-launcher \
+  wireguard-tools \
+  onionshare \
+  proxychains4 \
+  macchanger \
+  nmap \
+  masscan \
+  dnsutils \
+  whois \
+  nikto \
+  dirb \
+  gobuster \
+  tcpdump \
+  wireshark \
+  netcat-openbsd \
+  wfuzz \
+  sqlmap \
+  whatweb \
+  hydra \
+  john \
+  hashcat \
+  crunch \
+  aircrack-ng \
+  zsh \
+  util-linux \
+  docker.io \
+  secure-delete \
+  live-config \
+  live-config-systemd \
+  firmware-linux \
+  firmware-linux-nonfree \
+  firmware-misc-nonfree \
+  network-manager \
+  network-manager-gnome \
+  linux-image-amd64 \
+  live-boot \
+  systemd-sysv \
+  openjdk-21-jre \
+  jq \
+  nftables \
+  python3 \
+  python3-gi \
+  gir1.2-ayatanaappindicator3-0.1 \
+  gir1.2-gtk-3.0 \
+  libnotify-bin \
+  binutils || true
 
 apt-get autoremove -y --purge || true
 apt-get clean || true
